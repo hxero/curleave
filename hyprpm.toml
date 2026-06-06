@@ -7,5 +7,5 @@ description = "A hyprland plugin to unfocus windows when the cursor leave it"
 authors = ["hxero"]
 output = "curleave/curleave.so"
 build = [
-	"make -C hyplugs all"
+	"make -C curleave all"
 ]
