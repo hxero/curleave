@@ -1,0 +1,11 @@
+[repository]
+name = "curleave"
+authors = ["hxero"]
+
+[curleave]
+description = "A hyprland plugin to unfocus windows when the cursor leave it"
+authors = ["hxero"]
+output = "curleave/curleave.so"
+build = [
+	"make -C hyplugs all"
+]
