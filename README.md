@@ -6,7 +6,7 @@ cd curleave
 ```
 - Build
 ```sh
-meson setup build && -C build
+meson setup build && ninja -C build
 ```
 - Load the plugin
 ```sh
