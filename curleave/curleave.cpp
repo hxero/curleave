@@ -19,7 +19,7 @@ static CHyprSignalListener g_moveListener;
 
 static void onMouseMove(const Vector2D &pos, Event::SCallbackInfo &info) {
     // ignore if hold (fixes, resize dragging)
-    if (!g_pInputManager->hasHeldButtons())
+    if (g_pInputManager->hasHeldButtons())
         return;
     if (g_layoutManager->dragController()->target())
         return;
