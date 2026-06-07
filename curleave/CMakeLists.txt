@@ -12,7 +12,13 @@ add_library(curleave SHARED ${SRC})
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(deps REQUIRED IMPORTED_TARGET
-	hyprland wayland-server xkbcommon
+	libdrm
+	libinput
+	libudev
+	pixman-1
+	hyprland
+	wayland-server
+	xkbcommon
 )
 target_link_libraries(curleave PRIVATE rt PkgConfig::deps)
 
