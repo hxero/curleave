@@ -70,7 +70,7 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
         throw std::runtime_error("[curleave] Version mismatch");
     }
 
-    g_moveListener = Event::bus()->m_events.input.mouse.move.listen(
+    static auto g_moveListener = Event::bus()->m_events.input.mouse.move.listen(
         [](const Vector2D &pos, Event::SCallbackInfo &info) {
             onMouseMove(pos, info);
         });
