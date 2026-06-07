@@ -7,14 +7,23 @@
 #include <hyprland/src/event/EventBus.hpp>
 #include <hyprland/src/helpers/Monitor.hpp>
 #include <hyprland/src/includes.hpp>
+#include <hyprland/src/layout/LayoutManager.hpp>
 #include <hyprland/src/managers/SeatManager.hpp>
+#include <hyprland/src/managers/input/InputManager.hpp>
 #include <hyprland/src/plugins/PluginAPI.hpp>
 #include <hyprland/src/protocols/LayerShell.hpp>
+#include <hyprland/src/render/Renderer.hpp>
 
 inline HANDLE              PHANDLE = nullptr;
 static CHyprSignalListener g_moveListener;
 
 static void onMouseMove(const Vector2D &pos, Event::SCallbackInfo &info) {
+    // ignore if hold (fixes, resize dragging)
+    if (!g_pInputManager->m_currentlyHeldButtons.empty())
+        return;
+    if (g_layoutManager->dragController->target())
+        return;
+
     // check windows
     if (g_pCompositor->vectorToWindowUnified(
             pos, Desktop::View::WINDOW_ONLY | Desktop::View::ALLOW_FLOATING |
@@ -38,6 +47,9 @@ static void onMouseMove(const Vector2D &pos, Event::SCallbackInfo &info) {
 
     // truly empty - cancel and clear focus
     info.cancelled = true;
+
+	// reset cursor
+    g_pHyprRenderer->setCursorFromName("left_ptr");
 
     if (Desktop::focusState()->window())
         Desktop::focusState()->rawWindowFocus(nullptr,
