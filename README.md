@@ -1,4 +1,4 @@
-# Setup (Hyprpm)
+# Setup (Recommended)
 Update headers
 ```sh
 hyprpm update
