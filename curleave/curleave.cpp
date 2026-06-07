@@ -48,7 +48,7 @@ static void onMouseMove(const Vector2D &pos, Event::SCallbackInfo &info) {
     // truly empty - cancel and clear focus
     info.cancelled = true;
 
-	// reset cursor
+    // reset cursor
     g_pHyprRenderer->setCursorFromName("left_ptr");
 
     if (Desktop::focusState()->window())
@@ -64,13 +64,13 @@ APICALL EXPORT std::string PLUGIN_API_VERSION() { return HYPRLAND_API_VERSION; }
 APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
     PHANDLE = handle;
 
-    // if (__hyprland_api_get_hash() != __hyprland_api_get_client_hash()) {
-    //     HyprlandAPI::addNotification(PHANDLE, "[curleave] Version mismatch",
-    //                                  CHyprColor{1.0, 0.2, 0.2, 1.0}, 5000);
-    //     throw std::runtime_error("[curleave] Version mismatch");
-    // }
+    if (__hyprland_api_get_hash() != __hyprland_api_get_client_hash()) {
+        HyprlandAPI::addNotification(PHANDLE, "[curleave] Version mismatch",
+                                     CHyprColor{1.0, 0.2, 0.2, 1.0}, 5000);
+        throw std::runtime_error("[curleave] Version mismatch");
+    }
 
-    g_moveListener = Event::bus()->m_events.input.mouse.move.listen(
+    static auto g_moveListener = Event::bus()->m_events.input.mouse.move.listen(
         [](const Vector2D &pos, Event::SCallbackInfo &info) {
             onMouseMove(pos, info);
         });
