@@ -6,7 +6,7 @@ else
 endif
 
 CXXFLAGS ?= -O2
-CXXFLAGS += -shared -fPIC -std=c++23
+CXXFLAGS += -shared -fPIC -std=c++2b
 
 all:
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(EXTRA_FLAGS) curleave.cpp -o curleave.so `pkg-config --cflags pixman-1 libdrm libinput libudev hyprland wayland-server xkbcommon`
