@@ -70,7 +70,7 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
     if (HASH != CLIENT_HASH) {
         HyprlandAPI::addNotification(PHANDLE, "[curleave] Version mismatch",
                                      CHyprColor{1.0, 0.2, 0.2, 1.0}, 5000);
-        throw std::runtime_error("[bpp] Version mismatch");
+        throw std::runtime_error("[curleave] Version mismatch");
     }
 
     g_moveListener = Event::bus()->m_events.input.mouse.move.listen(
